@@ -29,6 +29,7 @@ const relevantEvents = new Set([
 ])
 
 export default async function (req: NextApiRequest, res: NextApiResponse) {
+    console.log('to sendo chamado pelo menos')
     if (req.method === 'POST') {
         const buf = await buffer(req)
         const secret = req.headers['stripe-signature']
@@ -49,9 +50,10 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
                     case 'checkout.session.completed':
                         const checkouSession = event.data.object as Stripe.Checkout.Session
                         await saveSubscription(checkouSession.subscription.toString(), checkouSession.customer.toString())
-                        
+                        console.log('caiu no type')
                         break
                     default:
+                        console.log('caiu no default')
                         throw new Error('Unhandled event.')
                 }
             } catch (err) {

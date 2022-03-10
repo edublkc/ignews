@@ -5,9 +5,6 @@ import { stripe } from '../../../services/strip';
 
 export async function saveSubscription(subscriptionId: string, costumerId: string) {
 
-    console.log(subscriptionId,costumerId)
-
-    
     const userRef = await fauna.query(
         q.Select(
             "ref",
@@ -37,6 +34,4 @@ export async function saveSubscription(subscriptionId: string, costumerId: strin
             q.Collection('subscriptions'), { data: subscriptionData }
         )
     )
-
-    console.log('>>>>>>>>>>>>>>>>>>>>>>>FOI ATE O FIM')
 }
